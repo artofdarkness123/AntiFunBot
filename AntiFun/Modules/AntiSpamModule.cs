@@ -31,16 +31,10 @@ namespace AntiFun.Modules
             //Words to delete.
             List<string> badWords = new List<string>()
             {
-                "fuck",
-                "bitch",
-                "nigger",
-                "slut",
-                "shit"
             };
             //Servers to ignore.
             List<ulong> ignoreServers = new List<ulong>()
             {
-                238539284666122250 // Oversalt
             };
 
             var context = new SocketCommandContext(_client, msg);
