@@ -25,10 +25,8 @@ namespace AntiFun
         private async Task HandleCommandAsync(SocketMessage s)
         {
             var msg = s as SocketUserMessage;
-            if (msg == null)
-            {
-                return;
-            }
+            if (msg == null) return;
+
             var context = new SocketCommandContext(_client, msg);
             int argPos = 0;
             if (msg.HasStringPrefix("!", ref argPos) || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))

@@ -11,11 +11,5 @@ namespace AntiFun.Modules
 {
     public class TestModule : ModuleBase<SocketCommandContext>
     {
-
-        [Command("test")]
-        public async Task Test()
-        {
-            
-        }
     }
 }

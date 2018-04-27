@@ -139,9 +139,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandler.cs" />
+    <Compile Include="Modules\AntiSpamModule.cs" />
     <Compile Include="Modules\InfoModule.cs" />
     <Compile Include="Modules\ModerationModule.cs" />
     <Compile Include="Modules\RandomModule.cs" />
+    <Compile Include="Modules\ServerManagementModule.cs" />
     <Compile Include="Modules\TestModule.cs" />
     <Compile Include="Modules\UtilityModule.cs" />
     <Compile Include="Program.cs" />

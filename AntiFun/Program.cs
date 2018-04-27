@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
+using AntiFun.Modules;
 
 namespace AntiFun
 {
@@ -12,6 +13,7 @@ namespace AntiFun
     {
         DiscordSocketClient _client;
         CommandHandler _handler;
+        AntiSpamModule _antiSpam;
 
         static void Main(string[] args)
             => new Program().MainAsync().GetAwaiter().GetResult();
@@ -20,9 +22,11 @@ namespace AntiFun
         {
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                LogLevel = LogSeverity.Verbose
+                LogLevel = LogSeverity.Verbose,
+                MessageCacheSize = 100
             });
             _handler = new CommandHandler();
+            _antiSpam = new AntiSpamModule();
             _client.Log += Log;
 
             if (Config.bot.token == "" || Config.bot.token == null)
@@ -33,6 +37,7 @@ namespace AntiFun
             await _client.LoginAsync(TokenType.Bot, Config.bot.token);
             await _client.StartAsync();
             await _handler.InitializeAsync(_client);
+            await _antiSpam.InitilizeAsync(_client);
 
             await Task.Delay(-1);
         }
