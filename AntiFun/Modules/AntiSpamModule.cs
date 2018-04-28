@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Discord;
@@ -27,6 +27,7 @@ namespace AntiFun.Modules
 
         private async Task HandleMessagesAsync(SocketMessage s)
         {
+            //TODO: Make this save to a JSON or something..
             var msg = s as SocketUserMessage;
             //Words to delete.
             List<string> badWords = new List<string>()

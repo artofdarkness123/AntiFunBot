@@ -53,6 +53,5 @@ namespace AntiFun.Modules
 
             await ReplyAsync("", false, embed);
         }
-
     }
 }

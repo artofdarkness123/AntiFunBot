@@ -22,10 +22,19 @@ namespace AntiFun.Modules
             embed.WithColor(Color.Red);
 
             if (user == null)
-            {
+            {gtrtyygt
                 embed.WithTitle("Kick");
                 embed.WithDescription("You didn't supply a user to kick!");
                 await ReplyAsync("", false, embed);
+                return;
+            }
+
+            if (Context.User == user)
+            {
+                embed.WithTitle("Kick");
+                embed.WithDescription("You cant kick yourself!");
+                await ReplyAsync("", false, embed);
+                return;
             }
 
             if (!string.IsNullOrWhiteSpace(reason))
@@ -49,6 +58,7 @@ namespace AntiFun.Modules
         public async Task Ban(IUser user = null, [Remainder] string reason = null)
         {
             //TODO: Try / Catch for when user is banned.
+            //TODO: Implement a time'd ban system.
             var embed = new EmbedBuilder();
             embed.WithTitle("Ban");
             embed.WithCurrentTimestamp();
@@ -58,6 +68,14 @@ namespace AntiFun.Modules
             {
                 embed.WithDescription("You didnt supply a user to ban!");
                 await ReplyAsync("", false, embed);
+            }
+
+            if (Context.User == user)
+            {
+                embed.WithTitle("Ban");
+                embed.WithDescription("You cant ban yourself!");
+                await ReplyAsync("", false, embed);
+                return;
             }
 
             if (!string.IsNullOrWhiteSpace(reason))
@@ -74,6 +92,13 @@ namespace AntiFun.Modules
             }
 
             await Context.Guild.AddBanAsync(user, 0, reason);
+        }
+
+        //TODO: Make this work.
+        [Command("unban"), Summary("Unbans a user from the channel."), RequireBotPermission(GuildPermission.BanMembers), RequireUserPermission(GuildPermission.BanMembers)]
+        public async Task Unban(IUser user)
+        {
+            await Context.Guild.RemoveBanAsync(user);
         }
 
         [Command("clear"), Summary("Clear messages from the channel."), RequireBotPermission(GuildPermission.ManageMessages), RequireUserPermission(GuildPermission.ManageMessages)]
@@ -97,18 +122,18 @@ namespace AntiFun.Modules
             if (amount == 1)
             {
                 embed.WithDescription($"{amount} message has been cleared.");
+                embed.WithColor(Color.Green);
             }
             else
             {
                 embed.WithDescription($"{amount} messages have been cleared.");
+                embed.WithColor(Color.Green);
             }
 
             await Context.Channel.DeleteMessagesAsync(messages);
             await ReplyAsync("", false, embed);
-            await Task.Delay(3000);
-
-            var oneMessage = await Context.Channel.GetMessagesAsync(1).Flatten();
-            await Context.Channel.DeleteMessagesAsync(oneMessage);
         }
+
+
     }
 }

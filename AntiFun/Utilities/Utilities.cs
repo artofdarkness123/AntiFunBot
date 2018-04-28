@@ -20,14 +20,5 @@ namespace AntiFun
             string finalReturn = String.Format($"`{message}`");
             return finalReturn;
         }
-
-        public static EmbedBuilder FormatEmbed(string title = null, string body = null)
-        {
-            EmbedBuilder embed = new EmbedBuilder();
-            embed.WithTitle(title);
-            embed.WithDescription(body);
-
-            return embed;
-        }
     }
 }
